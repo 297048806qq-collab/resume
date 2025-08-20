@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
     <!--responsive css-->
     <link rel="stylesheet" type="text/css" href="static/css/responsive.css">
+    
 </head>
 
 <body>
@@ -974,6 +975,17 @@
         </div>
     </section>
     <!--end project area-->
+    <div id="chart" style="width: 100%; height: 80%; "></div>
+    
+    <style>
+      /* 移动端高度限制 */
+      @media (max-width: 768px) {
+        #chart {
+          max-height: 500px !important;
+        }
+      }
+    </style>
+
     <!-- blog-area -->
     <section id="blog" class="blog-area section-padding">
         <div class="background-overlay bg-1"></div>
@@ -1243,7 +1255,611 @@
     <!--main js-->
     <script src="static/js/custom.js"></script>
 
-  
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <!-- TopoJSON → GeoJSON 转换 -->
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+    <script>
+        const chart = echarts.init(document.getElementById('chart'));
+    
+        // 整合后的数据数组
+        const POINTS = [
+          {
+            name: '清华大学',
+            value: [116.32384991852342, 39.99868106652632],
+            people: ['张三', '李四', '王五'],
+            papers: ['论文A']
+          },
+          {
+            name: '悉尼大学',
+            value: [151.18674333914214, -33.8882526663799],
+            people: [],
+            papers: []
+          },
+          {
+            name: '北京面壁智能科技有限公司',
+            value: [116.3238511822621, 39.9886814876792],
+            people: [],
+            papers: []
+          },
+          {
+            name: '北京邮电大学',
+            value: [116.3537907809373, 39.95862932419374],
+            people: [],
+            papers: []
+          },
+          {
+            name: '蒙特利尔大学（加拿大）',
+            value: [-73.61380213356637, 45.505758360943126],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'Mila - Quebec AI Institute（加拿大）',
+            value: [-73.61358237418472, 45.53091759831601],
+            people: [],
+            papers: []
+          },
+          {
+            name: '南洋理工大学',
+            value: [103.77695981692212, 1.297949629041062],
+            people: [],
+            papers: ['论文A']
+          },
+          {
+            name: 'Argonne National Laboratory',
+            value: [-87.97886970317622, 41.718458853197646],
+            people: [],
+            papers: ['论文B']
+          },
+          {
+            name: 'Penn State University',
+            value: [-77.85988694554236, 40.79841631843238],
+            people: [],
+            papers: ['论文B']
+          },
+          {
+            name: '微软亚洲研究院（上海）',
+            value: [121.45544111974577, 31.161941852222117],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'University of Illinois at Urbana-Champaign',
+            value: [-88.22414121857803, 40.10836048584704],
+            people: [],
+            papers: ['论文B']
+          },
+          {
+            name: 'University of Southern California',
+            value: [-118.28510627461773, 34.02253861057259],
+            people: [],
+            papers: ['论文B']
+          },
+          {
+            name: 'Yale University',
+            value: [-72.92228945901758, 41.31654194158776],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'Stanford University',
+            value: [-122.170070732172, 37.42789001165107],
+            people: ['John Smith', 'Jane Doe', 'Mike Johnson'],
+            papers: ['论文B']
+          },
+          {
+            name: 'University of Georgia',
+            value: [-83.37209160957403, 33.94245508146127],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'The Ohio State University',
+            value: [-83.02784397868213, 40.0062696679814],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'King Abdullah University of Science and Technology',
+            value: [39.10471490562654, 22.310085243297934],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'Duke University',
+            value: [-78.93794965367996, 36.00153860790702],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'The Hong Kong Polytechnic University',
+            value: [114.17947945014585, 22.30499658865872],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'Google DeepMind',
+            value: [-122.08523837141722, 37.42292319974112],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'Carnegie Mellon University',
+            value: [-80.03574984040954, 40.85104279488761],
+            people: [],
+            papers: ['论文B']
+          },
+          {
+            name: '复旦大学',
+            value: [121.49556283744273, 31.301989031911095],
+            people: ['陈八', '孙九'],
+            papers: ['论文A']
+          },
+          {
+            name: 'Imperial College London',
+            value: [-0.17480912974112603, 51.49897578924469],
+            people: [],
+            papers: ['论文C']
+          },
+          {
+            name: 'Massachusetts Institute of Technology',
+            value: [-71.09388105344378, 42.36021781592281],
+            people: ['Alice Brown', 'Bob Wilson'],
+            papers: ['论文B']
+          },
+          {
+            name: 'National University of Singapore',
+            value: [103.77695981692212, 1.297949629041062],
+            people: [],
+            papers: []
+          },
+          {
+            name: '北京大学',
+            value: [116.3038958921363, 39.988719110435646],
+            people: ['赵六', '钱七'],
+            papers: ['论文A']
+          },
+          {
+            name: '上海交通大学',
+            value: [121.43540390213003, 31.0319735782696],
+            people: [],
+            people: ['赵六', '钱七'],
+            papers: ['论文A', '论文B']
+          },
+          {
+            name: 'Stanford University',
+            value: [-122.16968449411635, 37.42780481189231],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'The Chinese University of Hong Kong (Shenzhen)',
+            value: [114.20511165089432, 22.69281329838987],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'Tsinghua University',
+            value: [116.32384991852342, 39.99868106652632],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'University of Chinese Academy of Sciences',
+            value: [116.38375028754976, 39.97859644834254],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'University of Oxford',
+            value: [-1.254099478177834, 51.757175694111545],
+            people: ['Emma Davis', 'Tom Miller'],
+            papers: ['论文C']
+          },
+          {
+            name: 'University of Pennsylvania',
+            value: [-75.19059767868416, 39.95166576331811],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'University of Science and Technology of China',
+            value: [116.24397026776329, 39.908784223328844],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'University of Toronto',
+            value: [-79.39548398038175, 43.663611152064675],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'Princeton University',
+            value: [-74.65404393394782, 40.343830154939106],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'University of Michigan',
+            value: [-83.73762774607053, 42.27726404499664],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'Oregon State University',
+            value: [-123.2816662883074, 44.56196255547998],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'The Chinese University of Hong Kong',
+            value: [114.22234831732194, 22.42555938718811],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'The University of Hong Kong',
+            value: [114.13678740176961, 22.283307487271074],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'University of California, Santa Barbara',
+            value: [-119.84820671383329, 34.41414874444878],
+            people: [],
+            papers: []
+          },
+          {
+            name: 'University of California San Diego',
+            value: [-117.23383479057973, 32.88133916457485],
+            people: [],
+            papers: ['论文B']
+          },
+          {
+            name: '小红书（上海）',
+            value: [121.47549797745022, 31.231959998113442],
+            people: [],
+            papers: []
+          },
+          {
+            name: '上海人工智能实验室',
+            value: [121.50559805889529, 31.312015090570366],
+            people: [],
+            papers: []
+          }
+        ];
+        // =============================================================
+    
+        // 数据处理 - 确保坐标格式正确
+        const data = POINTS.map(p => ({
+          name: p.name,
+          value: [p.value[0], p.value[1], 0]
+        }));
+    
+        // 论文颜色映射
+        const PAPER_COLORS = {
+          '论文A': '#80FFA5',  // 霓虹绿
+          '论文B': '#00DDFF',  // 霓虹蓝
+          '论文C': '#37A2FF'   // 深蓝
+        };
+    
+        const option = {
+          backgroundColor: '#1c1c1c',
+          tooltip: {
+            trigger: 'item',
+            formatter: function(params) {
+              if (params.seriesType === 'scatter3D') {
+                const institutionName = params.name;
+                // 从POINTS数组中找到对应的数据
+                const pointData = POINTS.find(p => p.name === institutionName);
+                const people = pointData ? pointData.people : [];
+                const papers = pointData ? pointData.papers : [];
+                
+                let html = `
+                  <div style="
+                    color: white;
+                    padding: 8px 12px;
+                    border-radius: 8px 8px 0 0;
+                    font-size: 16px;
+                    font-weight: 600;
+                    text-align: center;
+                  ">${institutionName}</div>
+                `;
+                
+                if (people.length > 0) {
+                  html += `
+                    <div style="margin-bottom: 15px;">
+                      <div style="
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 8px;
+                        margin-top: 10px;
+                        color: #80FFA5;
+                        font-size: 13px;
+                        font-weight: 600;
+                      ">
+                        <span style="margin-right: 6px;">👥</span>
+                        <span>人员 (${people.length})</span>
+                      </div>
+                      <div>`;
+                  people.forEach(person => {
+                    html += `
+                      <span style="
+                        color: #80FFA5;
+                        padding: 4px 8px;
+                        border-radius: 12px;
+                        font-size: 11px;
+                        display: inline-block;
+                        text-align: center;
+                      ">${person}</span>`;
+                  });
+                  html += `</div></div>`;
+                }
+                
+                if (papers.length > 0) {
+                  html += `
+                    <div>
+                      <div style="
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 8px;
+                        color: #00DDFF;
+                        font-size: 13px;
+                        font-weight: 600;
+                      ">
+                        <span style="margin-right: 6px;">📚</span>
+                        <span>相关论文 (${papers.length})</span>
+                      </div>
+                      <div style="
+                        display: flex;
+                        flex-direction: column;
+                        gap: 6px;
+                      ">`;
+                  papers.forEach(paper => {
+                    // 根据论文名称确定颜色
+                    let paperColor = PAPER_COLORS[paper]; // 使用映射
+                    
+                    html += `
+                      <div style="
+                        background: linear-gradient(90deg, ${paperColor}20, ${paperColor}10);
+                        color: ${paperColor};
+                        padding: 6px 10px;
+                        border-radius: 6px;
+                        font-size: 12px;
+                        font-weight: 500;
+                        border-left: 3px solid ${paperColor};
+                        display: flex;
+                        align-items: center;
+                      ">
+                        <span style="margin-right: 8px;">•</span>
+                        <span>${paper}</span>
+                      </div>`;
+                  });
+                  html += `</div></div>`;
+                }
+                
+                return html;
+              }
+              return params.name;
+            },
+            backgroundColor: 'linear-gradient(135deg, rgba(20, 25, 40, 0.98), rgba(10, 15, 30, 0.98))',  // 深色渐变背景
+            borderColor: '#0ca8df',  // 金色边框
+            borderWidth: 2,
+            borderRadius: 8,
+            textStyle: {
+              color: '#fff',
+              fontSize: 12
+            },
+            extraCssText: 'box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px);'
+          },
+          globe: {
+            // 简化纹理配置，只使用基础纹理
+            baseTexture: 'static/image/world.topo.bathy.200401.jpg',
+            // environment: 'static/image/starfield.jpg',
+            shading: 'lambert',
+            light: {
+              main: { intensity: 1.1 },
+              ambient: { intensity: 0.3 }
+            },
+            viewControl: {
+              distance: 200,
+              alpha: 15,
+              beta: 0,
+              autoRotate: true,
+              autoRotateSpeed: 2,
+              // 鼠标悬停时停止旋转
+              autoRotateAfterStill: 10,    // 设为0，鼠标离开立即恢复旋转
+              damping: 0.8                // 添加阻尼效果，让旋转更平滑
+            }
+          },
+          series: [
+            // 论文机构连线
+            ...(() => {
+              // 根据POINTS数据生成连线
+              const paperGroups = {
+                '论文A': [],
+                '论文B': [],
+                '论文C': []
+              };
+              
+              // 按论文分组
+              POINTS.forEach(point => {
+                point.papers.forEach(paper => {
+                  if (paperGroups[paper]) {
+                    paperGroups[paper].push(point);
+                  }
+                });
+              });
+              
+              // 生成连线系列
+              return Object.entries(paperGroups).map(([paperName, points]) => {
+                if (points.length < 2) return null;
+                
+                // 确定颜色
+                let paperColor = PAPER_COLORS[paperName];
+                
+                // 生成连线数据
+                const lines = [];
+                for (let i = 0; i < points.length - 1; i++) {
+                  for (let j = i + 1; j < points.length; j++) {
+                    lines.push({
+                      coords: [
+                        [points[i].value[0], points[i].value[1], 0.01],
+                        [points[j].value[0], points[j].value[1], 0.01]
+                      ]
+                    });
+                  }
+                }
+                
+                return {
+                  type: 'lines3D',
+                  name: paperName,
+                  coordinateSystem: 'globe',
+                  effect: {
+                    show: true,
+                    period: 0,
+                    trailWidth: 0,
+                    trailLength: 0,
+                    trailOpacity: 0,
+                    trailColor: paperColor
+                  },
+                  lineStyle: {
+                    width: 2,
+                    color: paperColor,
+                    opacity: 0.6
+                  },
+                  data: lines
+                };
+              }).filter(Boolean)
+            })(),
+            
+            // 图钉样式的标记点
+            {
+              type: 'scatter3D',
+              name: 'Locations',
+              coordinateSystem: 'globe',
+              symbol: 'pin',              // 使用图钉符号
+              symbolSize: 18,
+              // 确保标记点在正确层级
+              z: 99,
+              itemStyle: { 
+                color: '#FF4757',         // 经典红色图钉
+                borderColor: '#E8E8E8',   // 白色边框
+                borderWidth: 2
+              },
+              emphasis: { 
+                itemStyle: { 
+                  color: '#FF6B6B',       // 悬停时变为亮红色
+                  symbolSize: 22
+                }
+              },
+              // 添加标签显示
+              label: {
+                show: true,
+                position: 'right',
+                distance: 5,
+                color: '#E8E8E8',         // 白色文字
+                fontSize: 11,
+                backgroundColor: 'rgba(20, 25, 40, 0.9)',  // 深色背景，与浮框呼应
+                padding: [5, 10],
+                borderRadius: 8,
+                formatter: '{b}',  // 显示名称
+                // 确保标签在最上层显示
+                z: 100
+              },
+              data: data.map(point => ({
+                name: point.name,
+                value: [point.value[0], point.value[1], 0]
+              }))
+            }
+          ]
+        };
+    
+        async function loadWorld() {
+          try {
+            console.log('开始加载地球配置...');
+            console.log('纹理文件路径:', {
+              baseTexture: 'static/image/world.topo.bathy.200401.jpg',
+              heightTexture: 'static/image/bathymetry_bw_composite_4k.jpg',
+            //   environment: 'static/image/starfield.jpg'
+            });
+            
+            // 先尝试简单配置
+            const simpleOption = {
+              backgroundColor: '#1c1c1c',
+              globe: {
+                baseTexture: 'static/image/world.topo.bathy.200401.jpg',
+                // environment: 'static/image/starfield.jpg',
+                shading: 'lambert',
+                light: { main: { intensity: 1.1 }, ambient: { intensity: 0.3 } },
+                viewControl: { 
+                  distance: 200, 
+                  alpha: 15, 
+                  beta: 0, 
+                  autoRotate: true, 
+                  autoRotateSpeed: 2,
+                  autoRotateAfterStill: 10,
+                  damping: 0.8
+                }
+              },
+              series: [{
+                type: 'scatter3D',
+                coordinateSystem: 'globe',
+                symbol: 'pin',              // 图钉样式
+                symbolSize: 18,
+                itemStyle: { 
+                  color: '#FF4757',        // 经典红色
+                  borderColor: '#E8E8E8',  // 白色边框
+                  borderWidth: 2
+                },
+                data: data.map(point => ({
+                  name: point.name,
+                  value: [point.value[0], point.value[1], 0]
+                }))
+              }]
+            };
+            
+            console.log('尝试简单配置...');
+            chart.setOption(simpleOption);
+            console.log('简单地球配置已设置');
+            
+            // 如果简单配置成功，再尝试完整配置
+            setTimeout(() => {
+              try {
+                console.log('尝试完整配置...');
+                chart.setOption(option);
+                console.log('完整地球配置已设置');
+              } catch (e) {
+                console.log('完整配置失败，保持简单配置:', e);
+              }
+            }, 1000);
+            
+            window.addEventListener('resize', () => chart.resize());
+            console.log('窗口大小调整监听器已添加');
+            
+          } catch (error) {
+            console.error('加载地球时出错:', error);
+            document.body.innerHTML = `
+              <div style="color:#fff;padding:16px;font-family:system-ui;background:#1a1a1a;margin:20px;border-radius:8px;">
+                <h3>❌ 地球加载失败</h3>
+                <p>错误信息: ${error.message}</p>
+                <p>请检查:</p>
+                <ul>
+                  <li>img文件夹中的纹理文件是否存在</li>
+                  <li>浏览器控制台是否有其他错误</li>
+                  <li>ECharts GL库是否正确加载</li>
+                </ul>
+              </div>
+            `;
+          }
+        }
+    
+        loadWorld();
+      </script>
+
 </body>
 
 </html>
