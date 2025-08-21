@@ -1661,13 +1661,16 @@
             // environment: 'static/image/starfield.jpg',
             shading: 'lambert',
             light: {
-              main: { intensity: 1.1 },
-              ambient: { intensity: 0.3 }
+              main: { intensity: 0 },
+              ambient: { intensity: 1 }
             },
             viewControl: {
-              distance: 200,
-              alpha: 15,
-              beta: 0,
+              rotateSensitivity: 2.5, // 降低旋转灵敏度为默认的一半
+              zoomSensitivity: 2.5,   // 降低缩放灵敏度为默认的一半
+              panSensitivity: 0,
+              distance: 200, 
+              alpha: 15, 
+              beta: 200, 
               autoRotate: true,
               autoRotateSpeed: 2,
               // 鼠标悬停时停止旋转
@@ -1794,11 +1797,14 @@
                 baseTexture: 'static/image/world.topo.bathy.200401.jpg',
                 // environment: 'static/image/starfield.jpg',
                 shading: 'lambert',
-                light: { main: { intensity: 1.1 }, ambient: { intensity: 0.3 } },
+                light: { main: { intensity: 0 }, ambient: { intensity: 1 } },
                 viewControl: { 
-                  distance: 200, 
-                  alpha: 15, 
-                  beta: 0, 
+                    rotateSensitivity: 2.5, // 降低旋转灵敏度为默认的一半
+                    zoomSensitivity: 2.5,   // 降低缩放灵敏度为默认的一半
+                    panSensitivity: 0,
+                    distance: 200, 
+                    alpha: 15, 
+                    beta: 200,  
                   autoRotate: true, 
                   autoRotateSpeed: 2,
                   autoRotateAfterStill: 10,
