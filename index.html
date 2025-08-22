@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>Johnson – 个人作品集模板</title>
+    <title>个人简历</title>
     <!--favicon-->
     
     <!--bootstrap css-->
@@ -895,79 +895,15 @@
         <div class="container-two">
             <div class="row">
                 <div class="section-title section-title2 project-title">
-                    <h2><span>项目</span></h2>
-                    <h4>
-                       最新完成的项目
-                    </h4>
-                </div><!-- .section-title -->
+                    <h2><span>相关论文</span></h2>
+                    <h4>基于全球合作网络的学术研究</h4>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="slider-div">
-                        <div class="project-slider owl-carousel owl-theme">
-                            <div class="projects-single">
-                                <div class="projects-single-img">
-                                    <img src="static/picture/1.jpeg" alt="img">
-                                    <div class="overlay-content">
-                                        <p>开发</p>
-                                        <h3><a href="projects-details.html">网页设计</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="projects-single">
-                                <div class="projects-single-img">
-                                    <img src="static/picture/2.jpeg" alt="img">
-                                    <div class="overlay-content">
-                                        <p>应用</p>
-                                        <h3><a href="projects-details.html">应用开发</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="projects-single">
-                                <div class="projects-single-img">
-                                    <img src="static/picture/3.jpeg" alt="img">
-                                    <div class="overlay-content">
-                                        <p>开发</p>
-                                        <h3><a href="projects-details.html">Laravel开发</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="projects-single">
-                                <div class="projects-single-img">
-                                    <img src="static/picture/4.jpeg" alt="img">
-                                    <div class="overlay-content">
-                                        <p>开发</p>
-                                        <h3><a href="projects-details.html">PHP开发</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="projects-single">
-                                <div class="projects-single-img">
-                                    <img src="static/picture/5.jpeg" alt="img">
-                                    <div class="overlay-content">
-                                        <p>开发</p>
-                                        <h3><a href="projects-details.html">WordPress开发</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="projects-single">
-                                <div class="projects-single-img">
-                                    <img src="static/picture/1.jpeg" alt="img">
-                                    <div class="overlay-content">
-                                        <p>Development</p>
-                                        <h3><a href="projects-details.html">Web Design</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="projects-single">
-                                <div class="projects-single-img">
-                                    <img src="static/picture/2.jpeg" alt="img">
-                                    <div class="overlay-content">
-                                        <p>Development</p>
-                                        <h3><a href="projects-details.html">Apps Development</a></h3>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="papers-container">
+                        <div class="papers-list" id="papersList">
+                            <!-- 这里会动态生成论文内容 -->
                         </div>
                     </div>
                 </div>
@@ -1263,398 +1199,657 @@
     <script>
         const chart = echarts.init(document.getElementById('chart'));
     
-        // 整合后的数据数组
-        const POINTS = [
+        // 重构后的数据结构 - 以论文为中心
+        const PAPERS = [
           {
-            name: '清华大学',
-            value: [116.32384991852342, 39.99868106652632],
-            people: ['张三', '李四', '王五'],
-            papers: ['论文A']
+            id: 'paper_001',
+            name: 'ChatDev: Communicative Agents for Software Development',
+            color: '#80FFA5',  // 霓虹绿
+            institutions: [
+              {
+                name: 'Tsinghua University',
+                coordinates: [116.32384991852342, 39.99868106652632],
+                people: ['Chen Qian', 'Wei Liu', 'Nuo Chen', 'Yufan Dang', 'Jiahao Li', 'Weize Chen', 'Yusheng Su', 'Xin Cong', 'Juyuan Xu', 'Zhiyuan Liu', 'Maosong Sun']
+              },
+              {
+                name: 'BUPT',
+                coordinates: [116.3537907809373, 39.95862932419374],
+                people: ['Cheng Yang']
+              },
+              {
+                name: 'Modelbest Inc',
+                coordinates: [116.3238511822621, 39.9886814876792],
+                people: ['Dahai Li']
+              }
+            ]
           },
           {
-            name: '悉尼大学',
-            value: [151.18674333914214, -33.8882526663799],
-            people: [],
-            papers: []
+            id: 'paper_002',
+            name: 'SC-MCTS*: Interpretable Contrastive Monte Carlo Tree Search Reasoning',
+            color: '#00DDFF',  // 霓虹蓝
+            institutions: [
+              {
+                name: 'The University of Sydney',
+                coordinates: [151.18674333914214, -33.8882526663799],
+                people: ['Zitian Gao', 'Boye Niu']
+              },
+              {
+                name: 'Peking University (PKU)',
+                coordinates: [116.3038958921363, 39.988719110435646],
+                people: ['Xuzheng He']
+              },
+              {
+                name: 'Xiaohongshu Inc',
+                coordinates: [121.47549797745022, 31.231959998113442],
+                people: ['Haotian Xu']
+              },
+              {
+                name: 'Tsinghua University',
+                coordinates: [116.32384991852342, 39.99868106652632],
+                people: ['Aiwei Liu', 'Lijie Wen']
+              },
+              {
+                name: 'The Hong Kong University of Science and Technology',
+                coordinates: [114.26348472691717, 22.337693078420834],
+                people: ['Xuming Hu']
+              },
+              {
+                name: 'The Hong Kong University of Science and Technology (Guangzhou)',
+                coordinates: [113.47463983063324, 22.892720634468017],
+                people: ['Xuming Hu']
+              }
+            ]
           },
           {
-            name: '北京面壁智能科技有限公司',
-            value: [116.3238511822621, 39.9886814876792],
-            people: [],
-            papers: []
+            id: 'paper_003',
+            name: 'Advances and Challenges in Foundation Agents',
+            color: '#37A2FF',  // 霓虹粉
+            institutions: [
+            //   {
+            //     name: 'MetaGPT',
+            //     coordinates: [116.32384991852342, 39.99868106652632], // 使用清华大学的坐标作为参考
+            //     people: ['Jiayi Zhang', 'Jinlin Wang', 'Sirui Hong', 'Yuheng Cheng', 'Jiaqi Chen', 'Zhaoyang Yu', 'Fengwei Teng', 'Jiawei Xu', 'Jinyu Xiang', 'Yizhang Lin', 'Xinbing Liang', 'Chenglin Wu']
+            //   },
+              {
+                name: 'Université de Montréal',
+                coordinates: [-73.61380213356637, 45.505758360943126],
+                people: ['Bang Liu', 'Suyuchen Wang', 'Xiaoqiang Wang', 'Huan Zhang', 'Haochen Shi', 'Dekun Wu', 'Glen Berseth', 'Jianyun Nie']
+              },
+              {
+                name: 'Mila - Quebec AI Institute',
+                coordinates: [-73.61358237418472, 45.53091759831601],
+                people: ['Bang Liu', 'Suyuchen Wang', 'Xiaoqiang Wang', 'Huan Zhang', 'Haochen Shi', 'Dekun Wu', 'Glen Berseth']
+              },
+              {
+                name: 'Nanyang Technological University',
+                coordinates: [103.77695981692212, 1.297949629041062],
+                people: ['Xinfeng Li', 'Xiaojun Jia']
+              },
+              {
+                name: 'Argonne National Laboratory',
+                coordinates: [-87.97886970317622, 41.718458853197646],
+                people: ['Tanjin He', 'Ian Foster', 'Logan Ward']
+              },
+              {
+                name: 'The University of Sydney',
+                coordinates: [151.18674333914214, -33.8882526663799],
+                people: ['Tongliang Liu']
+              },
+              {
+                name: 'Penn State University',
+                coordinates: [-77.85988694554236, 40.79841631843238],
+                people: ['Shaokun Zhang', 'Qingyun Wu']
+              },
+              {
+                name: 'Microsoft Research Asia',
+                coordinates: [121.45544111974577, 31.161941852222117],
+                people: ['Kaitao Song']
+              },
+              {
+                name: 'University of Illinois at Urbana-Champaign',
+                coordinates: [-88.22414121857803, 40.10836048584704],
+                people: ['Kunlun Zhu', 'Haibo Jin', 'Haohan Wang', 'Jiaxuan You']
+              },
+              {
+                name: 'The Hong Kong University of Science and Technology',
+                coordinates: [114.26348472691717, 22.337693078420834],
+                people: ['Jiayi Zhang', 'Yuyu Luo', 'Peiyan Zhang', 'Boyan Li', 'Qiang Yang']
+              },
+              {
+                name: 'University of Southern California',
+                coordinates: [-118.28510627461773, 34.02253861057259],
+                people: ['Ollie Liu']
+              },
+              {
+                name: 'Yale University',
+                coordinates: [-72.92228945901758, 41.31654194158776],
+                people: ['Xiangru Tang']
+              },
+              {
+                name: 'Stanford University',
+                coordinates: [-122.170070732172, 37.42789001165107],
+                people: ['Xiao-Liang Qi']
+              },
+              {
+                name: 'University of Georgia',
+                coordinates: [-83.37209160957403, 33.94245508146127],
+                people: ['Tianming Liu']
+              },
+              {
+                name: 'The Ohio State University',
+                coordinates: [-83.02784397868213, 40.0062696679814],
+                people: ['Yu Su', 'Huan Sun', 'Yu Gu']
+              },
+              {
+                name: 'King Abdullah University of Science and Technology',
+                coordinates: [39.10471490562654, 22.310085243297934],
+                people: ['Mingchen Zhuge']
+              },
+              {
+                name: 'Duke University',
+                coordinates: [-78.93794965367996, 36.00153860790702],
+                people: ['Jian Pei']
+              },
+              {
+                name: 'The Hong Kong Polytechnic University',
+                coordinates: [114.17947945014585, 22.30499658865872],
+                people: ['Qiang Yang']
+              },
+              {
+                name: 'Google DeepMind',
+                coordinates: [-122.08523837141722, 37.42292319974112],
+                people: ['Chi Wang']
+              }
+            ]
+          },
+          // 在PAPERS数组的最后添加第四篇论文
+          {
+            id: 'paper_004',
+            name: 'A Survey of Self-Evolving Agents: On Path to Artificial Super Intelligence',
+            color: '#FF0087',  // 金色
+            institutions: [
+                {
+                name: 'Carnegie Mellon University',
+                coordinates: [-80.03574984040954, 40.85104279488761],
+                people: ['Yixiong Fang']
+                },
+                {
+                name: 'Fudan University',
+                coordinates: [121.49556283744273, 31.301989031911095],
+                people: ['Yuhang Zhou']
+                },
+                {
+                name: 'Oregon State University',
+                coordinates: [-123.2816662883074, 44.56196255547998],
+                people: ['Huazheng Wang']
+                },
+                {
+                name: 'Pennsylvania State University',
+                coordinates: [-77.85940414797278, 40.79844068403629],
+                people: ['Yiran Wu', 'Shaokun Zhang', 'Qingyun Wu']
+                },
+                {
+                name: 'Princeton University',
+                coordinates: [-74.65404393394782, 40.343830154939106],
+                people: ['Jiayi Geng', 'Shilong Liu', 'Jiahao Qiu', 'Hongru Wang', 'Mengdi Wang']
+                },
+                {
+                name: 'Princeton AI Lab',
+                coordinates: [-74.65404393394782, 40.343830154939106], // 使用普林斯顿大学的坐标
+                people: ['Jiahao Qiu', 'Mengdi Wang']
+                },
+                {
+                name: 'Shanghai Jiao Tong University',
+                coordinates: [121.43411099033615, 31.025357983961758],
+                people: ['Xinzhe Juan', 'Dongrui Liu', 'Qihan Ren']
+                },
+                {
+                name: 'The Chinese University of Hong Kong',
+                coordinates: [114.22234831732194, 22.42555938718811],
+                people: ['Hongru Wang', 'Han Xiao', 'Minda Hu']
+                },
+                {
+                name: 'The Hong Kong University of Science and Technology (Guangzhou)',
+                coordinates: [113.47463983063324, 22.892720634468017],
+                people: ['Jiayi Zhang']
+                },
+                {
+                name: 'The University of Hong Kong',
+                coordinates: [114.13678740176961, 22.283307487271074],
+                people: ['Mengkang Hu']
+                },
+                {
+                name: 'Tsinghua University',
+                coordinates: [116.32384991852342, 39.99868106652632],
+                people: ['Huan-ang Gao', 'Xuan Qi']
+                },
+                {
+                name: 'University of California, San Diego',
+                coordinates: [-117.23368458689144, 32.8814382749731],
+                people: ['Qiwen Zhao']
+                },
+                {
+                name: 'University of California, Santa Barbara',
+                coordinates: [-119.84820671383329, 34.41414874444878],
+                people: ['Wenyue Hua']
+                },
+                {
+                name: 'University of Illinois Urbana-Champaign',
+                coordinates: [-88.22414121857803, 40.10836048584704],
+                people: ['Cheng Qian', 'Zhenhailong Wang', 'Heng Ji']
+                },
+                {
+                name: 'University of Michigan',
+                coordinates: [-83.73762774607053, 42.27726404499664],
+                people: ['Xinzhe Juan']
+                }
+            ]
+            },
+            {
+                id: 'paper_005',
+                name: 'SE-Agent: Self-Evolution Trajectory Optimization in Multi-Step Reasoning with LLM-Based Agents',
+                color: '#FFBF00',  // 热粉色
+                institutions: [
+                    {
+                    name: 'Tsinghua University',
+                    coordinates: [116.32384991852342, 39.99868106652632],
+                    people: ['Jiaye Lin']
+                    },
+                    // {
+                    // name: 'StepFun',
+                    // coordinates: [116.32384991852342, 39.99868106652632], // 使用清华大学的坐标作为参考
+                    // people: ['Yifu Guo', 'Daxin Jiang', 'Binxing Jiao', 'Chen Hu']
+                    // },
+                    {
+                    name: 'University of Toronto (UofT)',
+                    coordinates: [-79.39476514844485, 43.663626674666446],
+                    people: ['Yuzhen Han']
+                    },
+                    {
+                    name: 'Peking University (PKU)',
+                    coordinates: [116.30570223444941, 39.98806383791698],
+                    people: ['Sen Hu', 'Hongzhang Liu', 'Ronghao Chen']
+                    },
+                    {
+                    name: 'University of Chinese Academy of Sciences (UCAS)',
+                    coordinates: [116.68304045570052, 40.408271682221155],
+                    people: ['Ziyi Ni', 'Licheng Wang', 'Huacan Wang']
+                    },
+                    {
+                    name: 'Chinese Academy of Sciences Institute of Automation (CASIA)',
+                    coordinates: [116.39106778666869, 40.004460547656535],
+                    people: ['Ziyi Ni']
+                    },
+                    {
+                    name: 'University of California, Riverside (UCR)',
+                    coordinates: [-117.32725974083831, 33.973927906911506],
+                    people: ['Mingguang Chen']
+                    },
+                    {
+                    name: 'University of Sydney (USYD)',
+                    coordinates: [151.18669799876687, -33.88776163517484],
+                    people: ['Hongzhang Liu']
+                    },
+                    {
+                    name: 'University of Minnesota (UMN)',
+                    coordinates: [-93.22749246867592, 44.97418730750411],
+                    people: ['Yangfan He']
+                    }
+                ]
+                }
+        ];
+
+        // 去重的机构列表（用于标记点显示）
+        const INSTITUTIONS = [
+        {
+            name: 'Tsinghua University',
+            coordinates: [116.32384991852342, 39.99868106652632],
+            papers: ['paper_001', 'paper_002', 'paper_004', 'paper_005']
           },
           {
-            name: '北京邮电大学',
-            value: [116.3537907809373, 39.95862932419374],
-            people: [],
-            papers: []
+            name: 'BUPT',
+            coordinates: [116.3537907809373, 39.95862932419374],
+            papers: ['paper_001']
           },
           {
-            name: '蒙特利尔大学（加拿大）',
-            value: [-73.61380213356637, 45.505758360943126],
-            people: [],
-            papers: []
+            name: 'Modelbest Inc',
+            coordinates: [116.3238511822621, 39.9886814876792],
+            papers: ['paper_001']
           },
           {
-            name: 'Mila - Quebec AI Institute（加拿大）',
-            value: [-73.61358237418472, 45.53091759831601],
-            people: [],
-            papers: []
+            name: 'The University of Sydney',
+            coordinates: [151.18674333914214, -33.8882526663799],
+            papers: ['paper_002', 'paper_003']
           },
           {
-            name: '南洋理工大学',
-            value: [103.77695981692212, 1.297949629041062],
-            people: [],
-            papers: ['论文A']
+            name: 'Peking University (PKU)',
+            coordinates: [116.3038958921363, 39.988719110435646],
+            papers: ['paper_002', 'paper_005']
+          },
+          {
+            name: 'Xiaohongshu Inc',
+            coordinates: [121.47549797745022, 31.231959998113442],
+            papers: ['paper_002']
+          },
+          {
+            name: 'The Hong Kong University of Science and Technology',
+            coordinates: [114.26348472691717, 22.337693078420834],
+            papers: ['paper_002', 'paper_003']
+          },
+          {
+            name: 'The Hong Kong University of Science and Technology (Guangzhou)',
+            coordinates: [113.47463983063324, 22.892720634468017],
+            papers: ['paper_002', 'paper_004']
+          },
+        //   {
+        //     name: 'MetaGPT',
+        //     coordinates: [116.32384991852342, 39.99868106652632],
+        //     papers: ['paper_003'],
+        //     people: ['Jiayi Zhang', 'Jinlin Wang', 'Sirui Hong', 'Yuheng Cheng', 'Jiaqi Chen', 'Zhaoyang Yu', 'Fengwei Teng', 'Jiawei Xu', 'Jinyu Xiang', 'Yizhang Lin', 'Xinbing Liang', 'Chenglin Wu']
+        //   },
+          {
+            name: 'Université de Montréal',
+            coordinates: [-73.61380213356637, 45.505758360943126],
+            papers: ['paper_003']
+          },
+          {
+            name: 'Mila - Quebec AI Institute',
+            coordinates: [-73.61358237418472, 45.53091759831601],
+            papers: ['paper_003']
+          },
+          {
+            name: 'Nanyang Technological University',
+            coordinates: [103.77695981692212, 1.297949629041062],
+            papers: ['paper_003']
           },
           {
             name: 'Argonne National Laboratory',
-            value: [-87.97886970317622, 41.718458853197646],
-            people: [],
-            papers: ['论文B']
+            coordinates: [-87.97886970317622, 41.718458853197646],
+            papers: ['paper_003']
           },
           {
             name: 'Penn State University',
-            value: [-77.85988694554236, 40.79841631843238],
-            people: [],
-            papers: ['论文B']
+            coordinates: [-77.85988694554236, 40.79841631843238],
+            papers: ['paper_003']
           },
           {
-            name: '微软亚洲研究院（上海）',
-            value: [121.45544111974577, 31.161941852222117],
-            people: [],
-            papers: []
+            name: 'Microsoft Research Asia',
+            coordinates: [121.45544111974577, 31.161941852222117],
+            papers: ['paper_003']
           },
           {
             name: 'University of Illinois at Urbana-Champaign',
-            value: [-88.22414121857803, 40.10836048584704],
-            people: [],
-            papers: ['论文B']
+            coordinates: [-88.22414121857803, 40.10836048584704],
+            papers: ['paper_003']
           },
           {
             name: 'University of Southern California',
-            value: [-118.28510627461773, 34.02253861057259],
-            people: [],
-            papers: ['论文B']
+            coordinates: [-118.28510627461773, 34.02253861057259],
+            papers: ['paper_003']
           },
           {
             name: 'Yale University',
-            value: [-72.92228945901758, 41.31654194158776],
-            people: [],
-            papers: []
+            coordinates: [-72.92228945901758, 41.31654194158776],
+            papers: ['paper_003']
           },
           {
             name: 'Stanford University',
-            value: [-122.170070732172, 37.42789001165107],
-            people: ['John Smith', 'Jane Doe', 'Mike Johnson'],
-            papers: ['论文B']
+            coordinates: [-122.170070732172, 37.42789001165107],
+            papers: ['paper_003']
           },
           {
             name: 'University of Georgia',
-            value: [-83.37209160957403, 33.94245508146127],
-            people: [],
-            papers: []
+            coordinates: [-83.37209160957403, 33.94245508146127],
+            papers: ['paper_003']
           },
           {
             name: 'The Ohio State University',
-            value: [-83.02784397868213, 40.0062696679814],
-            people: [],
-            papers: []
+            coordinates: [-83.02784397868213, 40.0062696679814],
+            papers: ['paper_003']
           },
           {
             name: 'King Abdullah University of Science and Technology',
-            value: [39.10471490562654, 22.310085243297934],
-            people: [],
-            papers: []
+            coordinates: [39.10471490562654, 22.310085243297934],
+            papers: ['paper_003']
           },
           {
             name: 'Duke University',
-            value: [-78.93794965367996, 36.00153860790702],
-            people: [],
-            papers: []
+            coordinates: [-78.93794965367996, 36.00153860790702],
+            papers: ['paper_003']
           },
           {
             name: 'The Hong Kong Polytechnic University',
-            value: [114.17947945014585, 22.30499658865872],
-            people: [],
-            papers: []
+            coordinates: [114.17947945014585, 22.30499658865872],
+            papers: ['paper_003']
           },
           {
             name: 'Google DeepMind',
-            value: [-122.08523837141722, 37.42292319974112],
-            people: [],
-            papers: []
+            coordinates: [-122.08523837141722, 37.42292319974112],
+            papers: ['paper_003']
           },
+        //   {
+        //     name: 'Canada CIFAR AI Chair',
+        //     coordinates: [-73.61380213356637, 45.505758360943126],
+        //     papers: ['paper_003']
+        //   },
           {
             name: 'Carnegie Mellon University',
-            value: [-80.03574984040954, 40.85104279488761],
-            people: [],
-            papers: ['论文B']
+            coordinates: [-80.03574984040954, 40.85104279488761],
+            papers: ['paper_004']
           },
           {
-            name: '复旦大学',
-            value: [121.49556283744273, 31.301989031911095],
-            people: ['陈八', '孙九'],
-            papers: ['论文A']
-          },
-          {
-            name: 'Imperial College London',
-            value: [-0.17480912974112603, 51.49897578924469],
-            people: [],
-            papers: ['论文C']
-          },
-          {
-            name: 'Massachusetts Institute of Technology',
-            value: [-71.09388105344378, 42.36021781592281],
-            people: ['Alice Brown', 'Bob Wilson'],
-            papers: ['论文B']
-          },
-          {
-            name: 'National University of Singapore',
-            value: [103.77695981692212, 1.297949629041062],
-            people: [],
-            papers: []
-          },
-          {
-            name: '北京大学',
-            value: [116.3038958921363, 39.988719110435646],
-            people: ['赵六', '钱七'],
-            papers: ['论文A']
-          },
-          {
-            name: '上海交通大学',
-            value: [121.43540390213003, 31.0319735782696],
-            people: [],
-            people: ['赵六', '钱七'],
-            papers: ['论文A', '论文B']
-          },
-          {
-            name: 'Stanford University',
-            value: [-122.16968449411635, 37.42780481189231],
-            people: [],
-            papers: []
-          },
-          {
-            name: 'The Chinese University of Hong Kong (Shenzhen)',
-            value: [114.20511165089432, 22.69281329838987],
-            people: [],
-            papers: []
-          },
-          {
-            name: 'Tsinghua University',
-            value: [116.32384991852342, 39.99868106652632],
-            people: [],
-            papers: []
-          },
-          {
-            name: 'University of Chinese Academy of Sciences',
-            value: [116.38375028754976, 39.97859644834254],
-            people: [],
-            papers: []
-          },
-          {
-            name: 'University of Oxford',
-            value: [-1.254099478177834, 51.757175694111545],
-            people: ['Emma Davis', 'Tom Miller'],
-            papers: ['论文C']
-          },
-          {
-            name: 'University of Pennsylvania',
-            value: [-75.19059767868416, 39.95166576331811],
-            people: [],
-            papers: []
-          },
-          {
-            name: 'University of Science and Technology of China',
-            value: [116.24397026776329, 39.908784223328844],
-            people: [],
-            papers: []
-          },
-          {
-            name: 'University of Toronto',
-            value: [-79.39548398038175, 43.663611152064675],
-            people: [],
-            papers: []
-          },
-          {
-            name: 'Princeton University',
-            value: [-74.65404393394782, 40.343830154939106],
-            people: [],
-            papers: []
-          },
-          {
-            name: 'University of Michigan',
-            value: [-83.73762774607053, 42.27726404499664],
-            people: [],
-            papers: []
+            name: 'Fudan University',
+            coordinates: [121.49556283744273, 31.301989031911095],
+            papers: ['paper_004']
           },
           {
             name: 'Oregon State University',
-            value: [-123.2816662883074, 44.56196255547998],
-            people: [],
-            papers: []
+            coordinates: [-123.2816662883074, 44.56196255547998],
+            papers: ['paper_004']
+          },
+          {
+            name: 'Pennsylvania State University',
+            coordinates: [-77.85940414797278, 40.79844068403629],
+            papers: ['paper_004']
+          },
+          {
+            name: 'Princeton University',
+            coordinates: [-74.65404393394782, 40.343830154939106],
+            papers: ['paper_004']
+          },
+          {
+            name: 'Princeton AI Lab',
+            coordinates: [-74.65404393394782, 40.343830154939106],
+            papers: ['paper_004']
+          },
+          {
+            name: 'Shanghai Jiao Tong University',
+            coordinates: [121.43411099033615, 31.025357983961758],
+            papers: ['paper_004']
           },
           {
             name: 'The Chinese University of Hong Kong',
-            value: [114.22234831732194, 22.42555938718811],
-            people: [],
-            papers: []
+            coordinates: [114.22234831732194, 22.42555938718811],
+            papers: ['paper_004']
           },
           {
             name: 'The University of Hong Kong',
-            value: [114.13678740176961, 22.283307487271074],
-            people: [],
-            papers: []
+            coordinates: [114.13678740176961, 22.283307487271074],
+            papers: ['paper_004']
+          },
+          {
+            name: 'University of California, San Diego',
+            coordinates: [-117.23368458689144, 32.8814382749731],
+            papers: ['paper_004']
           },
           {
             name: 'University of California, Santa Barbara',
-            value: [-119.84820671383329, 34.41414874444878],
-            people: [],
-            papers: []
+            coordinates: [-119.84820671383329, 34.41414874444878],
+            papers: ['paper_004']
           },
           {
-            name: 'University of California San Diego',
-            value: [-117.23383479057973, 32.88133916457485],
-            people: [],
-            papers: ['论文B']
+            name: 'University of Illinois Urbana-Champaign',
+            coordinates: [-88.22855259032981, 40.0987238573499],
+            papers: ['paper_004']
           },
           {
-            name: '小红书（上海）',
-            value: [121.47549797745022, 31.231959998113442],
-            people: [],
-            papers: []
+            name: 'University of Michigan',
+            coordinates: [-83.73762774607053, 42.27726404499664],
+            papers: ['paper_004']
           },
           {
-            name: '上海人工智能实验室',
-            value: [121.50559805889529, 31.312015090570366],
-            people: [],
-            papers: []
+            name: 'University of Toronto (UofT)',
+            coordinates: [-79.39476514844485, 43.663626674666446],
+            papers: ['paper_005']
+          },
+          {
+            name: 'University of Chinese Academy of Sciences (UCAS)',
+            coordinates: [116.68304045570052, 40.408271682221155],
+            papers: ['paper_005']
+          },
+          {
+            name: 'Chinese Academy of Sciences Institute of Automation (CASIA)',
+            coordinates: [116.39106778666869, 40.004460547656535],
+            papers: ['paper_005']
+          },
+          {
+            name: 'University of California, Riverside (UCR)',
+            coordinates: [-117.32725974083831, 33.973927906911506],
+            papers: ['paper_005']
+          },
+          {
+            name: 'University of Sydney (USYD)',
+            coordinates: [151.18669799876687, -33.88776163517484],
+            papers: ['paper_005']
+          },
+          {
+            name: 'University of Minnesota (UMN)',
+            coordinates: [-93.22749246867592, 44.97418730750411],
+            papers: ['paper_005']
           }
         ];
-        // =============================================================
-    
+
         // 数据处理 - 确保坐标格式正确
-        const data = POINTS.map(p => ({
+        const data = INSTITUTIONS.map(p => ({
           name: p.name,
-          value: [p.value[0], p.value[1], 0]
+          value: [p.coordinates[0], p.coordinates[1], 0]
         }));
-    
-        // 论文颜色映射
-        const PAPER_COLORS = {
-          '论文A': '#80FFA5',  // 霓虹绿
-          '论文B': '#00DDFF',  // 霓虹蓝
-          '论文C': '#37A2FF'   // 深蓝
-        };
-    
+        
         const option = {
           backgroundColor: '#1c1c1c',
           tooltip: {
             trigger: 'item',
             formatter: function(params) {
-              if (params.seriesType === 'scatter3D') {
+                if (params.seriesType === 'scatter3D') {
                 const institutionName = params.name;
-                // 从POINTS数组中找到对应的数据
-                const pointData = POINTS.find(p => p.name === institutionName);
-                const people = pointData ? pointData.people : [];
-                const papers = pointData ? pointData.papers : [];
+                // 从INSTITUTIONS数组中找到对应的数据
+                const institutionData = INSTITUTIONS.find(p => p.name === institutionName);
+                if (!institutionData) return institutionName;
+                
+                const papers = institutionData.papers || [];
                 
                 let html = `
-                  <div style="
+                    <div style="
                     color: white;
                     padding: 8px 12px;
                     border-radius: 8px 8px 0 0;
                     font-size: 16px;
                     font-weight: 600;
                     text-align: center;
-                  ">${institutionName}</div>
+                    ">${institutionName}</div>
                 `;
                 
-                if (people.length > 0) {
-                  html += `
-                    <div style="margin-bottom: 15px;">
-                      <div style="
-                        display: flex;
-                        align-items: center;
-                        margin-bottom: 8px;
-                        margin-top: 10px;
-                        color: #80FFA5;
-                        font-size: 13px;
-                        font-weight: 600;
-                      ">
-                        <span style="margin-right: 6px;">👥</span>
-                        <span>人员 (${people.length})</span>
-                      </div>
-                      <div>`;
-                  people.forEach(person => {
-                    html += `
-                      <span style="
-                        color: #80FFA5;
-                        padding: 4px 8px;
-                        border-radius: 12px;
-                        font-size: 11px;
-                        display: inline-block;
-                        text-align: center;
-                      ">${person}</span>`;
-                  });
-                  html += `</div></div>`;
-                }
-                
                 if (papers.length > 0) {
-                  html += `
+                    html += `
                     <div>
-                      <div style="
+                        <div style="
                         display: flex;
                         align-items: center;
                         margin-bottom: 8px;
                         color: #00DDFF;
                         font-size: 13px;
                         font-weight: 600;
-                      ">
+                        ">
                         <span style="margin-right: 6px;">📚</span>
                         <span>相关论文 (${papers.length})</span>
-                      </div>
-                      <div style="
+                        </div>
+                        <div style="
                         display: flex;
                         flex-direction: column;
-                        gap: 6px;
-                      ">`;
-                  papers.forEach(paper => {
-                    // 根据论文名称确定颜色
-                    let paperColor = PAPER_COLORS[paper]; // 使用映射
+                        gap: 8px;
+                        ">`;
                     
-                    html += `
-                      <div style="
-                        background: linear-gradient(90deg, ${paperColor}20, ${paperColor}10);
-                        color: ${paperColor};
-                        padding: 6px 10px;
-                        border-radius: 6px;
-                        font-size: 12px;
-                        font-weight: 500;
-                        border-left: 3px solid ${paperColor};
-                        display: flex;
-                        align-items: center;
-                      ">
-                        <span style="margin-right: 8px;">•</span>
-                        <span>${paper}</span>
-                      </div>`;
-                  });
-                  html += `</div></div>`;
+                    // 根据论文ID找到论文信息，并按论文分组显示人员
+                    papers.forEach(paperId => {
+                    const paper = PAPERS.find(p => p.id === paperId);
+                    
+                    if (paper) {
+                        // 找到当前机构在这篇论文中的参与人员
+                        const paperInstitution = paper.institutions.find(inst => inst.name === institutionName);
+                        const paperPeople = paperInstitution ? paperInstitution.people : [];
+                        console.log('paperInstitution', paperInstitution);
+                        
+                        html += `
+                        <div style="
+                            background: linear-gradient(90deg, ${paper.color}20, ${paper.color}10);
+                            color: ${paper.color};
+                            padding: 8px 12px;
+                            border-radius: 6px;
+                            font-size: 12px;
+                            font-weight: 500;
+                            border-left: 3px solid ${paper.color};
+                        ">
+                            <div style="
+                            font-weight: 600;
+                            margin-bottom: 6px;
+                            color: ${paper.color};
+                            ">${paper.name}</div>
+                            <div style="
+                            color: #E8E8E8;
+                            font-size: 11px;
+                            margin-top: 4px;
+                            ">`;
+                        
+                        if (paperPeople.length > 0) {
+                        html += `<span style="color: ${paper.color};">参与人员 (${paperPeople.length}): </span>`;
+                        paperPeople.forEach((person, index) => {
+                            html += `<span style="
+                            color: #E8E8E8;
+                            padding: 2px 6px;
+                            border-radius: 4px;
+                            font-size: 10px;
+                            display: inline-block;
+                            margin: 1px;
+                            background: rgba(255, 255, 255, 0.1);
+                            ">${person}</span>`;
+                            if (index < paperPeople.length - 1) {
+                            html += ' ';
+                            }
+                        });
+                        } else {
+                            html += `<span style="color: #999;">暂无人员信息</span>`;
+                        }
+                        
+                        html += `</div></div>`;
+                    }
+                    });
+                    html += `</div></div>`;
                 }
                 
                 return html;
-              }
-              return params.name;
+                }
+                return params.name;
             },
-            backgroundColor: 'linear-gradient(135deg, rgba(20, 25, 40, 0.98), rgba(10, 15, 30, 0.98))',  // 深色渐变背景
-            borderColor: '#0ca8df',  // 金色边框
+            backgroundColor: 'linear-gradient(135deg, rgba(20, 25, 40, 0.98), rgba(10, 15, 30, 0.98))',
+            borderColor: '#0ca8df',
             borderWidth: 2,
             borderRadius: 8,
             textStyle: {
-              color: '#fff',
-              fontSize: 12
+                color: '#fff',
+                fontSize: 12
             },
             extraCssText: 'box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px);'
-          },
+            },
           globe: {
             // 简化纹理配置，只使用基础纹理
             baseTexture: 'static/image/world.topo.bathy.200401.jpg',
@@ -1679,64 +1874,71 @@
             }
           },
           series: [
-            // 论文机构连线
+            // 论文机构连线 - 简化版本
             ...(() => {
-              // 根据POINTS数据生成连线
-              const paperGroups = {
-                '论文A': [],
-                '论文B': [],
-                '论文C': []
-              };
+              const lines = [];
               
-              // 按论文分组
-              POINTS.forEach(point => {
-                point.papers.forEach(paper => {
-                  if (paperGroups[paper]) {
-                    paperGroups[paper].push(point);
-                  }
+              console.log('开始生成连线，PAPERS数组:', PAPERS);
+              
+              PAPERS.forEach((paper, paperIndex) => {
+                console.log(`处理第${paperIndex + 1}篇论文:`, paper.name);
+                const institutions = paper.institutions;
+                console.log(`该论文有${institutions.length}个机构:`, institutions.map(i => i.name));
+                
+                if (institutions.length < 2) {
+                  console.log(`论文"${paper.name}"机构数量不足2个，跳过`);
+                  return;
+                }
+
+                const connections = [];
+  
+                // 找到参与人员最多的机构作为主要机构
+                const mainInstitution = institutions.reduce((max, current) => 
+                    current.people.length > max.people.length ? current : max
+                );
+                
+                // 从主要机构向其他机构连线
+                institutions.filter(inst => inst !== mainInstitution).forEach(inst => {
+                    connections.push({
+                        coords: [
+                            [mainInstitution.coordinates[0], mainInstitution.coordinates[1], 0.1],
+                            [inst.coordinates[0], inst.coordinates[1], 0.1]
+                        ]
+                    });
                 });
+                
+                if (connections.length > 0) {
+                  const lineSeries = {
+                    type: 'lines3D',
+                    name: paper.name,
+                    coordinateSystem: 'globe',
+                    zlevel: 10,  // 添加zlevel确保渲染顺序
+                    show: true,  // 确保连线可见
+                    effect: {
+                      show: true,
+                      period: 0,
+                      trailWidth: 0,
+                      trailLength: 0,
+                      trailOpacity: 0,
+                      trailColor: paper.color
+                    },
+                    lineStyle: {
+                      width: 2,
+                      color: paper.color,
+                      opacity: 0.6
+                    },
+                    data: connections
+                  };
+                  lines.push(lineSeries);
+                  console.log(`为论文"${paper.name}"创建连线系列:`, lineSeries);
+                } else {
+                  console.log(`论文"${paper.name}"没有生成任何连线`);
+                }
               });
               
-              // 生成连线系列
-              return Object.entries(paperGroups).map(([paperName, points]) => {
-                if (points.length < 2) return null;
-                
-                // 确定颜色
-                let paperColor = PAPER_COLORS[paperName];
-                
-                // 生成连线数据
-                const lines = [];
-                for (let i = 0; i < points.length - 1; i++) {
-                  for (let j = i + 1; j < points.length; j++) {
-                    lines.push({
-                      coords: [
-                        [points[i].value[0], points[i].value[1], 0.01],
-                        [points[j].value[0], points[j].value[1], 0.01]
-                      ]
-                    });
-                  }
-                }
-                
-                return {
-                  type: 'lines3D',
-                  name: paperName,
-                  coordinateSystem: 'globe',
-                  effect: {
-                    show: true,
-                    period: 0,
-                    trailWidth: 0,
-                    trailLength: 0,
-                    trailOpacity: 0,
-                    trailColor: paperColor
-                  },
-                  lineStyle: {
-                    width: 2,
-                    color: paperColor,
-                    opacity: 0.6
-                  },
-                  data: lines
-                };
-              }).filter(Boolean)
+              console.log('最终生成的连线系列:', lines);
+              console.log('连线系列数量:', lines.length);
+              return lines;
             })(),
             
             // 图钉样式的标记点
@@ -1789,7 +1991,6 @@
               heightTexture: 'static/image/bathymetry_bw_composite_4k.jpg',
             //   environment: 'static/image/starfield.jpg'
             });
-            
             // 先尝试简单配置
             const simpleOption = {
               backgroundColor: '#1c1c1c',
@@ -1864,6 +2065,142 @@
         }
     
         loadWorld();
+
+
+
+        // 论文聚焦功能
+        // 动态生成论文内容
+        // 动态生成论文内容
+function generatePapersContent() {
+    const papersList = document.getElementById('papersList');
+    if (!papersList) return;
+    
+    papersList.innerHTML = PAPERS.map((paper, index) => `
+        <div class="paper-item" data-paper-id="${paper.id}">
+            <div class="paper-header" onclick="togglePaperDetails('${paper.id}')">
+                <div class="paper-title">
+                    <h3>${paper.name}</h3>
+                    <div class="paper-meta">
+                        <span class="paper-color" style="background-color: ${paper.color};"></span>
+                        <span class="institution-count">${paper.institutions.length} 个机构</span>
+                        <span class="people-count">${paper.institutions.reduce((sum, inst) => sum + inst.people.length, 0)} 位研究人员</span>
+                    </div>
+                </div>
+                <div class="paper-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="paper-details" id="details-${paper.id}">
+                <div class="institutions-grid">
+                    ${paper.institutions.map(inst => `
+                        <div class="institution-card">
+                            <h4>${inst.name}</h4>
+                            <p class="location">${getLocationName(inst.coordinates)}</p>
+                            <div class="people-list">
+                                ${inst.people.map(person => `<span class="person">${person}</span>`).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// 根据坐标获取地点名称
+function getLocationName(coordinates) {
+    const [lon, lat] = coordinates;
+    
+    // 中国地区
+    if (lon > 73 && lon < 135 && lat > 18 && lat < 54) {
+        if (lon > 115 && lon < 125 && lat > 30 && lat < 40) return "中国东部";
+        if (lon > 100 && lon < 110 && lat > 20 && lat < 30) return "中国南部";
+        if (lon > 110 && lon < 120 && lat > 20 && lat < 30) return "中国东南部";
+        return "中国";
+    }
+    
+    // 北美地区
+    if (lon > -140 && lon < -50 && lat > 25 && lat < 70) return "北美洲";
+    
+    // 欧洲地区
+    if (lon > -10 && lon < 40 && lat > 35 && lat < 70) return "欧洲";
+    
+    // 澳大利亚
+    if (lon > 110 && lon < 155 && lat > -45 && lat < -10) return "澳大利亚";
+    
+    // 其他地区
+    if (lon > 0 && lon < 180 && lat > -60 && lat < 80) return "亚洲";
+    
+    return "全球";
+}
+
+// 切换论文详情显示
+function togglePaperDetails(paperId) {
+    const detailsElement = document.getElementById(`details-${paperId}`);
+    const toggleElement = document.querySelector(`[data-paper-id="${paperId}"] .paper-toggle`);
+    
+    if (detailsElement.classList.contains('active')) {
+        detailsElement.classList.remove('active');
+        toggleElement.classList.remove('active');
+    } else {
+        // 关闭其他所有论文详情
+        document.querySelectorAll('.paper-details').forEach(el => {
+            el.classList.remove('active');
+        });
+        document.querySelectorAll('.paper-toggle').forEach(el => {
+            el.classList.remove('active');
+        });
+        
+        // 打开当前论文详情
+        detailsElement.classList.add('active');
+        toggleElement.classList.add('active');
+        
+        // 高亮地球上的对应连线
+        highlightPaperOnGlobe(paperId);
+        
+        // 平滑滚动到当前论文
+        detailsElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+
+// 在地球上高亮论文连线
+function highlightPaperOnGlobe(paperId) {
+    const paper = PAPERS.find(p => p.id === paperId);
+    if (!paper) return;
+    
+    // 高亮显示对应的连线
+    chart.dispatchAction({
+        type: 'highlight',
+        seriesName: paper.name
+    });
+    
+    // 3秒后取消高亮
+    setTimeout(() => {
+        chart.dispatchAction({
+            type: 'downplay',
+            seriesName: paper.name
+        });
+    }, 3000);
+}
+
+// 页面加载完成后自动生成论文内容
+document.addEventListener('DOMContentLoaded', () => {
+    generatePapersContent();
+    
+    // 添加键盘快捷键支持
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            // ESC键关闭所有详情
+            document.querySelectorAll('.paper-details').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.paper-toggle').forEach(el => {
+                el.classList.remove('active');
+            });
+        }
+    });
+});
+
       </script>
 
 </body>
